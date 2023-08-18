@@ -7,13 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
 import com.dafinrs.calculatorcompose.ui.pages.calculator.components.ButtonsBox
 import com.dafinrs.calculatorcompose.ui.pages.calculator.components.TextViewBox
 import com.dafinrs.calculatorcompose.ui.theme.CalculatorComposeTheme
@@ -67,6 +62,8 @@ fun CalculatorScreenPageReviewLight() {
                 },
                     onPressDivisionSlash = {},
                     onPressPlusSign = {},
+                    onCloseBracket = {},
+                    onOpenBracket = {}
                 )
             }
         }
@@ -139,6 +136,8 @@ fun CalculatorScreenPageReviewDark() {
                     },
                     onPressDivisionSlash = {},
                     onPressPlusSign = {},
+                    onCloseBracket = {},
+                    onOpenBracket = {}
                 )
             }
         }
