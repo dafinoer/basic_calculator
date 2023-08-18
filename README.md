@@ -10,5 +10,5 @@ Simple calculator application where using jetpack compose
 
 ### Feature
 - [x] Simple add Arithmetic
-- [] Arithmetic with brackets
-- [] Arithmetic with percentage
+- [ ] Arithmetic with brackets
+- [ ] Arithmetic with percentage
