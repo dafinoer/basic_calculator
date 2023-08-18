@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,11 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dafinrs.calculatorcompose.ui.pages.calculator.ButtonCalculator
 
@@ -45,6 +40,8 @@ fun ButtonsBox(
     onPressMultiplication: () -> Unit,
     onPressPlusSign: () -> Unit,
     onPressDivisionSlash: () -> Unit,
+    onOpenBracket: () -> Unit,
+    onCloseBracket: () -> Unit,
     onPressResult: () -> Unit,
 ) {
 
@@ -78,26 +75,26 @@ fun ButtonsBox(
                     }
                     ButtonCalculator(
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        onTap = { /*TODO*/ },
+                        onTap = onOpenBracket,
                         sizeHeight = sizeWidthButton.value.dp,
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) {
                         Text(
-                            text = "( )",
+                            text = "(",
                             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.surface,
                         )
                     }
                     ButtonCalculator(
                         modifier = Modifier.padding(horizontal = 8.dp),
-                        onTap = { /*TODO*/ },
+                        onTap = onCloseBracket,
                         sizeHeight = sizeWidthButton.value.dp,
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) {
                         Text(
-                            text = "%",
+                            text = ")",
                             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.surface,
                         )
