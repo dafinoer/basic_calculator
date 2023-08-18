@@ -37,6 +37,7 @@ class EditTextMathState(
     val textState = mutableStateOf(initialText)
     val resultState = mutableStateOf("")
     var isAddSymbol = false
+    var isDouble = false
     private val resultHistory = MutableSharedFlow<String>(replay = 1)
 
     fun addText(value: String) {
@@ -51,20 +52,29 @@ class EditTextMathState(
             isAddSymbol = true
             textState.value = textState.value.plus(value.symbol)
         }
+        isDouble = false
     }
 
     fun onReset() {
         textState.value = ""
         resultState.value = ""
         isAddSymbol = false
+        isDouble = false
     }
 
     fun onResult() {
         if (!isAddSymbol) {
-            val result = calculatorRepository.calculateAritmatic(textState.value)
+            val result = calculatorRepository.calculateArithmetic(textState.value)
             if (result != null) {
                 resultState.value = result
             }
+        }
+    }
+
+    fun onAddDouble() {
+        if (!isDouble && textState.value.isNotEmpty()) {
+            textState.value = textState.value.plus('.')
+            isDouble = true
         }
     }
 

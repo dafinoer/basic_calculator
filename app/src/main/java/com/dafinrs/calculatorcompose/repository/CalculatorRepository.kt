@@ -6,86 +6,92 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
 
-class CalculatorRepository() {
+class CalculatorRepository {
 
     private val mathSymbol = setOf("+", "-", "x", "/")
 
-    fun calculateAritmatic(value: String): String? {
-        val resultHistory = arrayListOf<Double>()
+    fun calculateArithmetic(value: String): String? {
+        val resultHistory = ArrayDeque<Double>()
         val toListFromString = toStringValidMath(value)
         val symbolHistory = arrayListOf<String>()
         var firstState = 0.0
         for (mathNumb in toListFromString) {
-            val lastValue = if (resultHistory.isNotEmpty()) resultHistory.last() else null
+            val lastValue = resultHistory.lastOrNull()
 
             when {
-                mathSymbol.contains(mathNumb) -> symbolHistory.add(mathNumb)
-                !mathSymbol.contains(mathNumb) && symbolHistory.isNotEmpty() -> {
+                !mathSymbol.contains(mathNumb) -> {
                     val charInDouble = mathNumb.toDouble()
-                    val symbolMath = symbolHistory.last()
+                    val symbolMath = symbolHistory.lastOrNull()
 
                     if (symbolMath == "+") {
-                        resultHistory.add(
+                        resultHistory.addLast(
                             lastValue?.plus(charInDouble) ?: (charInDouble + firstState)
                         )
                     } else if (symbolMath == "-") {
-                        resultHistory.add(
+                        resultHistory.addLast(
                             lastValue?.minus(charInDouble) ?: (firstState - charInDouble)
                         )
                     } else if (symbolMath == "/") {
                         val total = firstState / charInDouble
-                        val prevResult = lastSymbol(symbolHistory, resultHistory)
-                        if (prevResult == "+") {
-                            resultHistory.add(
-                                total.plus(
-                                    resultHistory.last().minus(firstState)
+                        when (lastSymbol(symbolHistory)) {
+                            "+" -> {
+                                resultHistory.addLast(
+                                    total.plus(resultHistory.last().minus(firstState))
                                 )
-                            )
-                        } else if (prevResult == "-") {
-                            resultHistory.add(
-                                resultHistory.last().plus(firstState).minus(total)
-                            )
-                        } else if (prevResult == "/" || prevResult == "x") {
-                            resultHistory.add(resultHistory.last() / charInDouble)
-                        } else {
-                            resultHistory.add(total)
-                        }
+                            }
 
+                            "-" -> {
+                                resultHistory.addLast(
+                                    resultHistory.last().plus(firstState).minus(total)
+                                )
+                            }
+
+                            "/", "x" -> {
+                                resultHistory.addLast(resultHistory.last() / charInDouble)
+                            }
+
+                            else -> resultHistory.addLast(total)
+                        }
                     } else if (symbolMath == "x") {
                         val total = firstState * charInDouble
-                        val prevResult = lastSymbol(symbolHistory, resultHistory)
-                        if (prevResult == "+") {
-                            resultHistory.add(
-                                total.plus(
-                                    resultHistory.last().minus(firstState)
+                        when (lastSymbol(symbolHistory)) {
+                            "+" -> {
+                                resultHistory.addLast(
+                                    total.plus(
+                                        resultHistory.last().minus(firstState)
+                                    )
                                 )
-                            )
-                        } else if (prevResult == "-") {
-                            resultHistory.add(
-                                resultHistory.last().plus(firstState).minus(total)
-                            )
-                        } else if (prevResult == "/" || prevResult == "x") {
-                            resultHistory.add(resultHistory.last() * charInDouble)
-                        } else {
-                            resultHistory.add(total)
+                            }
+
+                            "-" -> {
+                                resultHistory.addLast(
+                                    resultHistory.last().plus(firstState).minus(total)
+                                )
+                            }
+
+                            "x", "/" -> {
+                                resultHistory.addLast(resultHistory.last() * charInDouble)
+                            }
+                            else -> resultHistory.addLast(total)
                         }
                     }
                     firstState = mathNumb.toDouble()
                 }
 
-                else -> firstState = mathNumb.toDouble()
+                else -> symbolHistory.add(mathNumb)
             }
         }
 
         if (resultHistory.isNotEmpty()) {
             return resultHistory.last().toString()
         }
+
         return null
     }
 
     private fun toStringValidMath(value: String): ArrayList<String> {
         val toListFromString = arrayListOf<String>()
-        var validDoubleString: String = ""
+        var validDoubleString = ""
 
         for (index in value.indices) {
             if (mathSymbol.contains(value[index].toString())) {
@@ -102,13 +108,9 @@ class CalculatorRepository() {
         return toListFromString
     }
 
-    private fun lastSymbol(
-        symbols: ArrayList<String>,
-        resultHistory: ArrayList<Double>,
-    ): String? {
-        if (symbols.size > 1 && resultHistory.isNotEmpty()) {
-            val lastSymbol = symbols[symbols.lastIndex - 1]
-            return lastSymbol
+    private fun lastSymbol(symbols: ArrayList<String>): String? {
+        if (symbols.size > 1) {
+            return symbols[symbols.lastIndex - 1]
         }
         return null
     }

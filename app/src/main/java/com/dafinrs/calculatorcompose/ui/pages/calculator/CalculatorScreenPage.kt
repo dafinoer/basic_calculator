@@ -39,9 +39,7 @@ fun CalculatorScreenPage() {
 
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            val editTextState = rememberEditTextState(initialState = "0", calculatorRepository)
-            val coroutineScope = rememberCoroutineScope()
-
+            val editTextState = rememberEditTextState(initialState = "", calculatorRepository)
 
             TextViewBox(
                 modifier = Modifier
@@ -97,15 +95,13 @@ fun CalculatorScreenPage() {
                     editTextState.addSymbol(MathSymbol.BAGI)
                 },
                 onPressResult = {
-                    coroutineScope.launch {
-                        editTextState.onResult()
-                    }
+                    editTextState.onResult()
                 },
                 onReset = {
                     editTextState.onReset()
                 },
                 onSetDouble = {
-                    editTextState.addText(".")
+                    editTextState.onAddDouble()
                 },
             )
         }
