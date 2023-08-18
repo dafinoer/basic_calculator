@@ -15,7 +15,7 @@ Simple calculator application where using jetpack compose
 
 ### Time and Space Complexity
 - O(n) Time
-- 0(n) Space
+- O(n) Space
 
 ### Feature
 - [x] Simple add Arithmetic
