@@ -1,11 +1,5 @@
 package com.dafinrs.calculatorcompose.repository
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
-import org.koin.core.annotation.Factory
-import org.koin.core.annotation.InjectedParam
-
-
 class CalculatorRepository {
 
     private val mathSymbol = setOf("+", "-", "x", "/")
@@ -72,6 +66,7 @@ class CalculatorRepository {
                             "x", "/" -> {
                                 resultHistory.addLast(resultHistory.last() * charInDouble)
                             }
+
                             else -> resultHistory.addLast(total)
                         }
                     }
