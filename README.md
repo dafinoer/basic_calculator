@@ -14,7 +14,7 @@ Simple calculator application where using jetpack compose
 - Linier calculate Arithmetic base on term sequence of calculate operation
 
 ### Time and Space Complexity
-- O(n) Time
+- O(MN) Time
 - O(n) Space
 
 ### Feature
