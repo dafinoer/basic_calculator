@@ -9,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.dafinrs.calculatorcompose.presentation.arithmetic.ArithmeticState
 import com.dafinrs.calculatorcompose.ui.pages.calculator.components.ButtonsBox
 import com.dafinrs.calculatorcompose.ui.pages.calculator.components.TextViewBox
 import com.dafinrs.calculatorcompose.ui.theme.CalculatorComposeTheme
@@ -25,7 +26,7 @@ fun CalculatorScreenPageReviewLight() {
                         .fillMaxWidth()
                         .fillMaxHeight(0.4f),
                     mathCharacter = "10x10",
-                    mathResult = "100"
+                    mathResult = ArithmeticState.Result("100.0")
                 )
                 ButtonsBox(modifier = Modifier
                     .fillMaxWidth()
@@ -83,7 +84,7 @@ fun CalculatorScreenPageReviewDark() {
                         .fillMaxWidth()
                         .fillMaxHeight(0.4f),
                     mathCharacter = "10x10",
-                    mathResult = "100"
+                    mathResult = ArithmeticState.Initialize
                 )
                 ButtonsBox(
                     modifier = Modifier
