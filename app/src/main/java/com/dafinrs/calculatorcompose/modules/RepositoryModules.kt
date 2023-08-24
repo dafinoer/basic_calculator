@@ -1,17 +1,16 @@
 package com.dafinrs.calculatorcompose.modules
 
-import com.dafinrs.calculatorcompose.repository.CalculatorRepository
+import com.dafinrs.calculatorcompose.data.repository.ArithmeticRepository
+import com.dafinrs.calculatorcompose.domains.repository.ArithmeticRepositoryImpl
 import kotlinx.coroutines.CoroutineDispatcher
-import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Factory
-import org.koin.core.annotation.InjectedParam
 import org.koin.core.annotation.Module
 
 
 @Module
 class RepositoryModules {
 
-    @Factory
-    fun bindCalculator() =
-        CalculatorRepository()
+    @Factory(binds = [ArithmeticRepository::class])
+    fun bindCalculatorRepository(coroutineDispatcher: CoroutineDispatcher) =
+        ArithmeticRepositoryImpl(coroutineDispatcher)
 }
