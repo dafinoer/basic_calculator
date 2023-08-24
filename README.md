@@ -10,7 +10,6 @@ Simple calculator application where using jetpack compose
 
 ### Algorithm & Data Structure
 - Use Stack (last in first out)
-- Slicing window
 - Linier calculate Arithmetic base on term sequence of calculate operation
 
 ### Time and Space Complexity
