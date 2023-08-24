@@ -1,44 +1,27 @@
 package com.dafinrs.calculatorcompose.presentation.typing
 
-import android.view.KeyEvent.DispatcherState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.dafinrs.calculatorcompose.model.MathSymbol
-import com.dafinrs.calculatorcompose.model.toMathSymbol
-import com.dafinrs.calculatorcompose.repository.CalculatorRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import com.dafinrs.calculatorcompose.domains.model.MathSymbol
 
 
 @Composable
 fun rememberEditTextState(
-    initialState: String,
-    calculatorRepository: CalculatorRepository,
+    initialState: String
 ): EditTextMathState {
-    return remember {
-        EditTextMathState(
-            initialState,
-            calculatorRepository,
-        )
-    }
+    return remember { EditTextMathState(initialState) }
 }
 
-class EditTextMathState(
-    initialText: String, val calculatorRepository: CalculatorRepository
-) {
+class EditTextMathState(initialText: String) {
     val textState = mutableStateOf(initialText)
-    val resultState = mutableStateOf("")
+
     var isAddSymbol = false
+        get() = field
+
     var isDouble = false
-    private val resultHistory = MutableSharedFlow<String>(replay = 1)
+
+    fun isValidateCalculate() = !isAddSymbol && textState.value.isNotEmpty()
 
     fun addText(value: String) {
         isAddSymbol = false
@@ -57,18 +40,8 @@ class EditTextMathState(
 
     fun onReset() {
         textState.value = ""
-        resultState.value = ""
         isAddSymbol = false
         isDouble = false
-    }
-
-    fun onResult() {
-        if (!isAddSymbol) {
-            val result = calculatorRepository.calculateArithmetic(textState.value)
-            if (result != null) {
-                resultState.value = result
-            }
-        }
     }
 
     fun onAddDouble() {
@@ -78,7 +51,7 @@ class EditTextMathState(
         }
     }
 
-    private fun dropLast(newValue: Char) {
+    private fun dropLast(newValue: String) {
         textState.value = textState.value.dropLast(1).let { it + newValue }
     }
 }
