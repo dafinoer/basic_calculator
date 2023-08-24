@@ -79,4 +79,6 @@ dependencies {
     implementation "io.insert-koin:koin-compose:1.0.4"
     implementation "io.insert-koin:koin-annotations:1.2.2"
     ksp "io.insert-koin:koin-ksp-compiler:1.2.2"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
 }
