@@ -2,41 +2,26 @@ package com.dafinrs.calculatorcompose.ui.pages.calculator.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.dafinrs.calculatorcompose.R
+import com.dafinrs.calculatorcompose.presentation.arithmetic.ArithmeticState
 
 
 @Composable
 fun TextViewBox(
     modifier: Modifier = Modifier,
     mathCharacter: String = "0",
-    mathResult: String? = null,
+    mathResult: ArithmeticState = ArithmeticState.Initialize,
 ) {
 
     Surface(
@@ -63,15 +48,57 @@ fun TextViewBox(
 
                 },
             )
-            TextMathCharacter(
-                modifier = Modifier.padding(vertical = 12.dp),
-                style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.onSurface),
-                textValue = mathResult ?: "",
-                isReadOnly = true,
-                onChangeValue = {
+            when (mathResult) {
+                is ArithmeticState.Result -> {
+                    TextMathCharacter(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                        textValue = mathResult.result,
+                        isReadOnly = true,
+                        onChangeValue = {
 
-                },
-            )
+                        },
+                    )
+                }
+
+                is ArithmeticState.InvalidArithmetic -> {
+                    TextMathCharacter(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                        textValue = mathResult.result ?: "",
+                        isReadOnly = true,
+                        onChangeValue = {
+
+                        },
+                    )
+                }
+
+                is ArithmeticState.InvalidNumber -> {
+                    TextMathCharacter(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                        textValue = stringResource(id = R.string.invalid_number),
+                        isReadOnly = true,
+                        onChangeValue = {
+
+                        },
+                    )
+                }
+
+                is ArithmeticState.ArithmeticFailure -> {
+                    TextMathCharacter(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        style = MaterialTheme.typography.displayLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                        textValue = stringResource(id = R.string.failure_number),
+                        isReadOnly = true,
+                        onChangeValue = {
+
+                        },
+                    )
+                }
+
+                else -> Unit
+            }
         }
     }
 }
@@ -79,9 +106,9 @@ fun TextViewBox(
 @Composable
 private fun TextMathCharacter(
     modifier: Modifier = Modifier,
-    isReadOnly: Boolean = false,
-    style: TextStyle,
     textValue: String,
+    style: TextStyle,
+    isReadOnly: Boolean = false,
     onChangeValue: (String) -> Unit,
 ) {
 
