@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">CalculatorCompose</string>
 
+    <string name="multiplication">Multiplication</string>
+    <string name="plus_sign">Plus</string>
+    <string name="reduction_sign">Reduction</string>
+    <string name="equal_sign">Equal</string>
+
     <string name="invalid_number">Invalid</string>
     <string name="failure_number">Failure Arithmetic</string>
 </resources>
