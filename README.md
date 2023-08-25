@@ -4,8 +4,7 @@ Simple calculator application where using jetpack compose
 
 ### Screenshot
 
-![dark](https://github.com/dafinoer/basic_calculator/blob/master/screenshots/bg_dark_calculator.jpg)(image_url = 250x)
-![light](https://github.com/dafinoer/basic_calculator/blob/master/screenshots/bg_light_calculator.jpg)(image_url = 250x)
+<img src="https://github.com/dafinoer/basic_calculator/blob/master/screenshots/bg_dark_calculator.jpg" width="25%"/> <img src="https://github.com/dafinoer/basic_calculator/blob/master/screenshots/bg_light_calculator.jpg" width="25%"/>
 
 ### How to Use
 
