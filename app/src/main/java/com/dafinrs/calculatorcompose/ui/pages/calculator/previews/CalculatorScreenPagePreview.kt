@@ -30,66 +30,7 @@ fun CalculatorScreenPageReviewLight() {
                 )
                 ButtonsBox(modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(1f), onPress7Button = {
-
-                }, onPress8Button = {
-
-                }, onPress9Button = {
-
-                }, onPress0Button = {
-
-                }, onPress1Button = {
-
-                }, onPress2Button = {
-
-                }, onPress3Button = {
-
-                }, onPress4Button = {
-
-                }, onPress5Button = {
-
-                }, onPress6Button = {
-
-                }, onPressReduction = {
-
-                }, onPressMultiplication = {
-
-                }, onPressResult = {
-
-                }, onReset = {
-
-                }, onSetDouble = {
-
-                },
-                    onPressDivisionSlash = {},
-                    onPressPlusSign = {},
-                    onCloseBracket = {},
-                    onOpenBracket = {}
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true, apiLevel = 30)
-@Composable
-fun CalculatorScreenPageReviewDark() {
-
-    CalculatorComposeTheme(darkTheme = true) {
-        Scaffold {
-            Column(modifier = Modifier.padding(it)) {
-                TextViewBox(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.4f),
-                    mathCharacter = "10x10",
-                    mathResult = ArithmeticState.Initialize
-                )
-                ButtonsBox(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(1f),
+                    .fillMaxHeight(1f),
                     onPress7Button = {
 
                     },
@@ -138,8 +79,79 @@ fun CalculatorScreenPageReviewDark() {
                     onPressDivisionSlash = {},
                     onPressPlusSign = {},
                     onCloseBracket = {},
-                    onOpenBracket = {}
+                    onOpenBracket = {})
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, apiLevel = 30)
+@Composable
+fun CalculatorScreenPageReviewDark() {
+
+    CalculatorComposeTheme(darkTheme = true) {
+        Scaffold {
+            Column(modifier = Modifier.padding(it)) {
+                TextViewBox(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.4f),
+                    mathCharacter = "10x10",
+                    mathResult = ArithmeticState.Initialize
                 )
+                ButtonsBox(modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(1f),
+                    onPress7Button = {
+
+                    },
+                    onPress8Button = {
+
+                    },
+                    onPress9Button = {
+
+                    },
+                    onPress0Button = {
+
+                    },
+                    onPress1Button = {
+
+                    },
+                    onPress2Button = {
+
+                    },
+                    onPress3Button = {
+
+                    },
+                    onPress4Button = {
+
+                    },
+                    onPress5Button = {
+
+                    },
+                    onPress6Button = {
+
+                    },
+                    onPressReduction = {
+
+                    },
+                    onPressMultiplication = {
+
+                    },
+                    onPressResult = {
+
+                    },
+                    onReset = {
+
+                    },
+                    onSetDouble = {
+
+                    },
+                    onPressDivisionSlash = {},
+                    onPressPlusSign = {},
+                    onCloseBracket = {},
+                    onOpenBracket = {})
             }
         }
     }

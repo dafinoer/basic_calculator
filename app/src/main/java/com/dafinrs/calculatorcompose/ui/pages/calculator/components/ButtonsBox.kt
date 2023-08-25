@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -15,8 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dafinrs.calculatorcompose.R
 import com.dafinrs.calculatorcompose.ui.pages.calculator.ButtonCalculator
 
 
@@ -36,7 +44,7 @@ fun ButtonsBox(
     onPress3Button: () -> Unit,
     onPress0Button: () -> Unit,
     onSetDouble: () -> Unit,
-    onPressReduction:() -> Unit,
+    onPressReduction: () -> Unit,
     onPressMultiplication: () -> Unit,
     onPressPlusSign: () -> Unit,
     onPressDivisionSlash: () -> Unit,
@@ -48,11 +56,11 @@ fun ButtonsBox(
     BoxWithConstraints(modifier = modifier) {
         val sizeWidthButton = remember {
             derivedStateOf {
-                (this.maxWidth.value / 4).minus(32)
+                (this.maxWidth.value / 5).minus(4)
             }
         }
 
-        Surface(modifier = modifier.padding(horizontal = 16.dp)) {
+        Surface(modifier = modifier) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -160,10 +168,12 @@ fun ButtonsBox(
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) {
-                        Text(
-                            text = "X",
-                            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.surface,
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(
+                                id = R.string.multiplication
+                            ),
+                            tint = MaterialTheme.colorScheme.surface,
                         )
                     }
                 }
@@ -214,10 +224,10 @@ fun ButtonsBox(
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) {
-                        Text(
-                            text = "-",
-                            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.surface,
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.baseline_remove_24),
+                            contentDescription = stringResource(id = R.string.reduction_sign),
+                            tint = MaterialTheme.colorScheme.surface
                         )
                     }
                 }
@@ -268,10 +278,10 @@ fun ButtonsBox(
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) {
-                        Text(
-                            text = "+",
-                            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.surface,
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(id = R.string.plus_sign),
+                            tint = MaterialTheme.colorScheme.surface,
                         )
                     }
                 }
@@ -319,10 +329,10 @@ fun ButtonsBox(
                         sizeWidth = sizeWidthButton.value.dp,
                         color = MaterialTheme.colorScheme.primaryContainer
                     ) {
-                        Text(
-                            text = "=",
-                            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSurface,
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.equal_48px),
+                            contentDescription = stringResource(id = R.string.equal_sign),
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
